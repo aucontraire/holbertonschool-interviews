@@ -33,15 +33,15 @@ if __name__ == '__main__':
     users_dict = {}
     users_json = get_users(base_url)
     for user in users_json:
-        user_id = user['id']
-        username = user['username']
+        user_id = user.get('id')
+        username = user.get('username')
         users_dict[user_id] = []
         todo_list = get_todo_list(base_url, user_id)
         for todo in todo_list:
             todo_dict = {}
             todo_dict['username'] = username
-            todo_dict['task'] = todo['title']
-            todo_dict['completed'] = todo['completed']
+            todo_dict['task'] = todo.get('title')
+            todo_dict['completed'] = todo.get('completed')
             users_dict[user_id].append(todo_dict)
 
     with open('todo_all_employees.json', 'w') as f:
